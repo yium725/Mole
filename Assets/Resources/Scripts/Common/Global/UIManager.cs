@@ -179,10 +179,16 @@ public class CanvasController
 
     public void Clear()
     {
-        for (int i = canvas.transform.childCount; i >= 0; i--)
+        if (canvas.transform.childCount > 0)
         {
-            Transform trans = canvas.transform.GetChild(i);
-            GameObject.Destroy(trans.gameObject);
+            for (int i = canvas.transform.childCount; i >= 0; i--)
+            {
+                Transform trans = canvas.transform.GetChild(i-1);
+                if (trans != null)
+                {
+                    GameObject.Destroy(trans.gameObject);
+                }
+            }
         }
     }
 }
